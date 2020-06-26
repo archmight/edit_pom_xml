@@ -11,7 +11,7 @@ class EditingPomWrapper:
 
 
     def set_configurations(self):
-
+        pass
 
         # self.editing_pom = []
         #

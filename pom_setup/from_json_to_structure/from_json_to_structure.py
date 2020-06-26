@@ -11,13 +11,12 @@ class FromJsonToStructure:
 
     def work_with_data(self):
         for element in self.data:
+            filename = None
+            group_id = None
+            artifact_id = None
+            version = None
+            packaging = None
             for key, values in element.items():
-
-                filename = key
-                group_id = "unknown"
-                artifact_id = filename
-                version = "0.9"
-                packaging = "war"
 
                 if "groupId" in values:
                     group_id = values["groupId"]
@@ -28,7 +27,7 @@ class FromJsonToStructure:
                 if "packaging" in values:
                     packaging = values["packaging"]
 
-                self.structure_list.append(PomConfigurationStructure(file=filename,
+            self.structure_list.append(PomConfigurationStructure(file=filename,
                                                                      groupId=group_id, artifactId=artifact_id,
                                                                      version=version, packaging=packaging))
 
