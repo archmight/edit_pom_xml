@@ -4,11 +4,11 @@ class PomConfigurationStructure:
 
     def __init__(self, file_path, groupId, artifactId, version, packaging):
 
-       self.file_path = file_path
-       self.group_id = groupId
-       self.artifact_id = artifactId
-       self.version = version
-       self.package = packaging
+        self.file_path = file_path
+        self.group_id = groupId
+        self.artifact_id = artifactId
+        self.version = version
+        self.package = packaging
 
         if self.group_id is None:
             self.group_id = "unknown"
@@ -24,11 +24,11 @@ class PomConfigurationStructure:
 
 
     def print(self):
-        print(self.file)
-        print(self.groupId)
-        print(self.artifactId)
+        print(self.file_path)
+        print(self.group_id)
+        print(self.artifact_id)
         print(self.version)
-        print(self.packaging)
+        print(self.package)
 
     def get_filename(self):
-        return self.file
+        return self.file_path
