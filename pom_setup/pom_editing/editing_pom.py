@@ -3,11 +3,12 @@ import platform
 import xml.etree.ElementTree as etree
 from xml.dom import minidom
 
+from pom_setup.from_json_to_structure.pom_configuration_list import ConfigurationList
 from pom_setup.pom_editing.creating_execution import CreatingExecution
 
 
 class EditingPom:
-    def __init__(self, project_path, file_names, local_repo_dir_name, configuration_list):
+    def __init__(self, project_path, file_names, local_repo_dir_name, configuration_list: ConfigurationList):
 
         self.pom_file_name = "/pom.xml"
         self.version = "1.0"
@@ -25,8 +26,10 @@ class EditingPom:
         self.file_list = file_names
         self.path_split_char = self.set_path_split_char()
 
+        self.configuration_list = configuration_list
 
-    def add_install_plugins(self):
+
+    def add_install_execution(self):
         build_path = self.create_path("build")
         build = self.root.find(build_path)
         plugins_path = self.create_path("plugins")
@@ -42,29 +45,20 @@ class EditingPom:
         executions = etree.SubElement(plugin, 'executions')
         ### end xml wrapper - add plugin, executions ###
 
-
-        for execution_id, file in enumerate(self.file_list):
-            file_path = self.project_path + self.path_split_char + self.repo_name + self.path_split_char + file
-            CreatingExecution(self.configuration_element, file_path, execution_id)
-            executions.append()
+        for execution_id, Configuration in enumerate(self.configuration_list):
+            file_path = self.project_path + self.path_split_char + self.repo_name + self.path_split_char + Configuration.filename
+            executions.append(self.add_install_plugin_to_pom_xml(
+                    configuration=Configuration, file_path=file_path,execution_id=execution_id)
+                              )
 
         ### +++ ###
         plugins.append(plugin)
         self.write_to_pom_file(minidom.parseString(etree.tostring(self.root)))
         ### +++ ###
 
-    def add_install_plugin_to_pom_xml(self, filename, execution_id, group_id=None, artifact_id=None,
-                                      path=None, file_version=None):
-        if group_id is None:
-            group_id = self.group_id
-        if artifact_id is None:
-            artifact_id = filename[:-8]
-        if path is None:
-            path = self.repo_name
-        if file_version is None:
-            file_version = self.version
-        return self.create_execution(filename=filename, execution_id=execution_id, path=path, groupId=group_id,
-                                     artifactId=artifact_id, file_version=file_version)
+    def add_install_plugin_to_pom_xml(self, configuration,  file_path, execution_id):
+        creating_execution = CreatingExecution(configuration=configuration, file_path=file_path, execution_id= execution_id)
+        return creating_execution.create_execution()
 
 
     def write_to_pom_file(self, xml_block: minidom):

@@ -27,9 +27,9 @@ class FromJsonToStructure:
                 if "packaging" in values:
                     packaging = values["packaging"]
 
-            self.structure_list.append(PomConfigurationStructure(file=filename,
-                                                                     groupId=group_id, artifactId=artifact_id,
-                                                                     version=version, packaging=packaging))
+            self.structure_list.append(PomConfigurationStructure(filename=filename,
+                                                                 groupId=group_id, artifactId=artifact_id,
+                                                                 version=version, packaging=packaging))
 
     def get_configuration_list(self):
         return self.structure_list

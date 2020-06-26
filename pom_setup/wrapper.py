@@ -13,6 +13,6 @@ class Wrapper:
         from_json_to_wrapper = FromJsonToStructureWrapper(json_config_path)
 
         print(from_json_to_wrapper.get_filenames_list())
-        conf_list  = from_json_to_wrapper.configuration_list()
+        conf_list = from_json_to_wrapper.configuration_list()
         self.pom = EditingPomWrapper(project_path=project_path,configuration_list=conf_list)
 
