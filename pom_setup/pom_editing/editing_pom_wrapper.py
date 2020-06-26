@@ -3,10 +3,10 @@ from pom_setup.pom_editing.editing_pom import EditingPom
 
 class EditingPomWrapper:
 
-    def __init__(self, configuration_list):
+    def __init__(self, project_path, file_names, local_repo_dir_name, configuration_list):
 
         self.configuration_list = configuration_list
-        self.editing_pom = EditingPom()
+        self.editing_pom = EditingPom(project_path=, file_names=,local_repo_dir_name=, configuration_list)
 
 
 

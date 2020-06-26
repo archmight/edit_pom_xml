@@ -1,5 +1,4 @@
 import xml.etree.ElementTree as etree
-
 from pom_setup.from_json_to_structure.pom_configuration_structure import PomConfigurationStructure
 
 
@@ -8,10 +7,10 @@ class CreatingExecution:
     def __init__(self, configuration: PomConfigurationStructure, file_path, execution_id):
         self.configuration = configuration
         self.execution = self.create_execution(file_path=file_path, execution_id=execution_id,
-                                               groupId=self.configuration.groupId,
-                                               artifactId=self.configuration.artifactId,
+                                               groupId=self.configuration.group_id,
+                                               artifactId=self.configuration.artifact_id,
                                                file_version=configuration.version,
-                                               packaging_type=self.configuration.packaging)
+                                               packaging_type=self.configuration.package)
 
     def create_execution(self, file_path, execution_id, groupId, artifactId, file_version, packaging_type):
         execution = etree.Element('execution')
@@ -35,3 +34,4 @@ class CreatingExecution:
         packaging = etree.SubElement(configuration, 'packaging')
         packaging.text = packaging_type
         return execution
+
