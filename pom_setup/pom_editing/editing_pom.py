@@ -45,12 +45,12 @@ class EditingPom:
         executions = etree.SubElement(plugin, 'executions')
         ### end xml wrapper - add plugin, executions ###
 
-        for execution_id, Configuration in enumerate(self.configuration_list):
-            file_path = self.project_path + self.path_split_char + self.repo_name + self.path_split_char + Configuration.filename
+        for execution_id, Configuration in enumerate(self.configuration_list.get_list()):
+            file_path = str(self.repo_name) + str(self.path_split_char) + str(Configuration.filename)
+            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", file_path)
             executions.append(self.add_install_plugin_to_pom_xml(
-                    configuration=Configuration, file_path=file_path,execution_id=execution_id)
+                    configuration=Configuration, file_path=file_path, execution_id=execution_id)
                               )
-
         ### +++ ###
         plugins.append(plugin)
         self.write_to_pom_file(minidom.parseString(etree.tostring(self.root)))

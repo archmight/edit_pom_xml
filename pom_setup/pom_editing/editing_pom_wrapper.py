@@ -9,8 +9,7 @@ class EditingPomWrapper:
         self.editing_pom = EditingPom(project_path=project_path, file_names=file_names,
                                       local_repo_dir_name=local_repo_dir_name, configuration_list=configuration_list)
 
-        self.editing_pom.add_install_plugin_to_pom_xml()
-
+        self.editing_pom.add_install_execution()
 
     def set_configurations(self):
         pass

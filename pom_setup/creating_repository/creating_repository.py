@@ -57,7 +57,7 @@ class CreatingRepository:
             for jar_path in jars_list:
                 shutil.copy(jar_path, os.path.join(self.project_path, self.directory_name))
                 print(jar_path.split(self.path_split_char)[-1] + ": ADDED IN LOCAL REPO")
-                self.jars_list.append(str(jar_path.split(path_split_char)[-1]))
+                self.jars_list.append(str(jar_path.split(self.path_split_char)[-1]))
 
     def set_split_char(self):
         self.path_split_char = self.set_path_split_char()

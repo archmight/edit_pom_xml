@@ -14,5 +14,6 @@ class Wrapper:
 
         print(from_json_to_wrapper.get_filenames_list())
         conf_list = from_json_to_wrapper.configuration_list()
-        self.pom = EditingPomWrapper(project_path=project_path,configuration_list=conf_list)
+        self.pom = EditingPomWrapper(project_path=project_path, file_names=[],
+                                     local_repo_dir_name=local_repo_directory, configuration_list=conf_list)
 

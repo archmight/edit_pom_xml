@@ -17,7 +17,7 @@ class FromJsonToStructure:
             version = None
             packaging = None
             for key, values in element.items():
-
+                filename = key
                 if "groupId" in values:
                     group_id = values["groupId"]
                 if "artifactId" in values:
