@@ -46,9 +46,9 @@ class WorkWithJson:
                 "version": "1.0",
                 "packaging": "jar"
             }},
-            { "JCPrequest-1.0.jar": {
+            { "JCPRequest-1.0.jar": {
                 "groupId": "ru.lanit.jcp",
-                "artifactId": "JCPrequest",
+                "artifactId": "JCPRequest",
                 "version": "1.0",
                 "packaging": "jar"
             }}
@@ -58,4 +58,4 @@ class WorkWithJson:
 
 if __name__ == "__main__":
     a = WorkWithJson("/home/gerdon/Desktop/tmp/j_s-o_n/jars_configuration.json")
-    a.read_file()
+    a.write_file()
