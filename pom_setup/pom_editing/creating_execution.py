@@ -3,7 +3,7 @@ from pom_setup.from_json_to_structure.pom_configuration_structure import PomConf
 
 
 class CreatingExecution:
-
+    """class, that convert configuration structure into xml object"""
     def __init__(self, configuration: PomConfigurationStructure, file_path, execution_id):
         self.configuration = configuration
         self.file_path = file_path

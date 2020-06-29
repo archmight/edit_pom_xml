@@ -8,8 +8,9 @@ from pom_setup.pom_editing.creating_execution import CreatingExecution
 
 
 class EditingPom:
+    """ basic class in this package, edit xml"""
     def __init__(self, project_path, file_names, local_repo_dir_name, configuration_list: ConfigurationList):
-
+        """ set values, paths etc."""
         self.pom_file_name = "/pom.xml"
         self.version = "1.0"
         self.group_id = "ru.lanit.jcp"
@@ -30,13 +31,13 @@ class EditingPom:
 
 
     def add_install_execution(self):
+        """ find necessary xml block and add into this xml code"""
         build_path = self.create_path("build")
         build = self.root.find(build_path)
         plugins_path = self.create_path("plugins")
         plugins = build.find(plugins_path)
 
         ### make xml wrapper -  add plugin, executions ###
-
         plugin = etree.Element("plugin")
         group_id = etree.SubElement(plugin, 'groupId')
         group_id.text = "org.apache.maven.plugins"
@@ -45,33 +46,36 @@ class EditingPom:
         executions = etree.SubElement(plugin, 'executions')
         ### end xml wrapper - add plugin, executions ###
 
+        ### change configuration_list
         for execution_id, Configuration in enumerate(self.configuration_list.get_list()):
             file_path = str(self.repo_name) + str(self.path_split_char) + str(Configuration.filename)
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", file_path)
+            print("adding jar: ", file_path)
             executions.append(self.add_install_plugin_to_pom_xml(
                     configuration=Configuration, file_path=file_path, execution_id=execution_id)
                               )
-        ### +++ ###
+        # append plugin result
         plugins.append(plugin)
         self.write_to_pom_file(minidom.parseString(etree.tostring(self.root)))
-        ### +++ ###
 
     def add_install_plugin_to_pom_xml(self, configuration,  file_path, execution_id):
+        """ get configuration structure into xml """
         creating_execution = CreatingExecution(configuration=configuration, file_path=file_path, execution_id= execution_id)
         return creating_execution.create_execution()
 
 
     def write_to_pom_file(self, xml_block: minidom):
+        """ write string that contain xml """
         s2 = xml_block.toprettyxml('    ', '\n', 'utf-8')
         pom_path = self.project_path + self.pom_file_name
         with open(pom_path, mode='w') as f:
             f.write(s2.decode('utf-8'))
 
     def create_path(self, name):
+        """ get string like a xml tag """
         return "{" + self.namespace1 + "}" + name
 
     def set_path_split_char(self):
-        """method to correctly """
+        """method to correctly set path separator"""
         if platform.system() == 'Windows':
             return '\\'
         elif platform.system() == 'Linux':

@@ -2,13 +2,17 @@ import json
 
 
 class WorkWithJson:
+    """ class to read-write json data """
     def __init__(self, path_to_config_file):
+        """set path to json file data"""
         self.file_path = path_to_config_file
 
     def create_file(self):
+        """useless method"""
         pass
 
     def read_file(self):
+        """read json aand convert into python structure"""
         data = []
         with open(self.file_path, "r") as r_f:
             data = json.loads(r_f.read())
@@ -16,11 +20,13 @@ class WorkWithJson:
         return data
 
     def write_file(self):
+        """write into file"""
         data = self.set_data()
         with open(self.file_path, 'w') as w_f:
             w_f.write(json.dumps(data, ensure_ascii=False))
 
     def set_data(self):
+        """example write data struct"""
         data = [
             {"ASN1P-1.0.jar": {
                 "groupId": "ru.lanit.jcp",

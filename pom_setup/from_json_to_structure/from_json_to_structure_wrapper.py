@@ -2,6 +2,7 @@ from pom_setup.from_json_to_structure.from_json_to_structure import FromJsonToSt
 
 
 class FromJsonToStructureWrapper:
+    """ class to get data from json, wrapper  above FromJsonToStructure """
     def __init__(self, path_to_config_file):
         self.from_json_to_structure = FromJsonToStructure(path_to_config_file)
         self.from_json_to_structure.work_with_data()

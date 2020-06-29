@@ -4,12 +4,14 @@ from pom_setup.from_json_to_structure.work_with_json import WorkWithJson
 
 
 class FromJsonToStructure:
+    """ main class in this package that link json file and structure, that contain this"""
     def __init__(self, path_to_config_file):
         self.json_work = WorkWithJson(path_to_config_file)
         self.data = self.json_work.read_file()
         self.structure_list = ConfigurationList()
 
     def work_with_data(self):
+        """set configuration list"""
         for element in self.data:
             filename = None
             group_id = None

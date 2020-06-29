@@ -1,7 +1,7 @@
 
 
 class PomConfigurationStructure:
-
+    """class that get interface to work with pom.xml configuration structure"""
     def __init__(self, filename, groupId, artifactId, version, packaging):
 
         self.filename = filename
@@ -23,6 +23,7 @@ class PomConfigurationStructure:
             self.package = "some_package"
 
     def print(self):
+        """print result for debug"""
         print(self.filename)
         print(self.group_id)
         print(self.artifact_id)

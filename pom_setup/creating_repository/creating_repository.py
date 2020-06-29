@@ -5,8 +5,9 @@ import platform
 
 
 class CreatingRepository:
+    """basic class it this package, create local repository"""
     def __init__(self, jars_directory: str, project_path: str, directory_name="jars_dependencies"):
-
+        """ set values, paths etc."""
         self.jars_directory = jars_directory
         self.project_path = project_path
 
@@ -41,8 +42,7 @@ class CreatingRepository:
         return paths_list
 
     def cp_jars(self, jars_list: list):
-        """copy in local repo only unique files"""
-
+        """copy in local repo only unique files, no duplicates """
 
         if self.is_repo_exist_flag:
             current_files = os.listdir(os.path.join(self.project_path, self.directory_name))
@@ -63,7 +63,7 @@ class CreatingRepository:
         self.path_split_char = self.set_path_split_char()
 
     def set_path_split_char(self):
-        """method to correctly """
+        """method to correctly set path separator"""
         if platform.system() == 'Windows':
             return '\\'
         elif platform.system() == 'Linux':

@@ -2,7 +2,9 @@ from pom_setup.from_json_to_structure.pom_configuration_structure import PomConf
 
 
 class ConfigurationList:
+    """class contain list of configuration structures and basic methods to work with it """
     def __init__(self):
+        # list that contain configuration structures
         self.structure_list = []
 
     def append(self, pom_configuration: PomConfigurationStructure):
